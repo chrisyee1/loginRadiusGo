@@ -12,9 +12,9 @@ import (
 
 // PostAuthAddEmail is used to add additional emails to a user's account.
 // Post Parameters are email: string and type: string
-func PostAuthAddEmail(verificationURL, emailTemplate, authorization string, body interface{}) (AuthEmail, error) {
-	data := new(AuthEmail)
-	req, reqErr := CreateRequest("POST", os.Getenv("DOMAIN") + "/identity/v2/auth/email", body)
+func PostAuthAddEmail(verificationURL, emailTemplate, authorization string, body interface{}) (AuthBool, error) {
+	data := new(AuthBool)
+	req, reqErr := CreateRequest("POST", os.Getenv("DOMAIN")+"/identity/v2/auth/email", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -32,9 +32,9 @@ func PostAuthAddEmail(verificationURL, emailTemplate, authorization string, body
 // PostAuthForgotPassword is used to send the reset password url to a specified account.
 // Note: If you have the UserName workflow enabled, you may replace the 'email' parameter with 'username'
 // Post parameter is email: string
-func PostAuthForgotPassword(resetPasswordURL, emailTemplate string, body interface{}) (AuthPassword, error) {
-	data := new(AuthPassword)
-	req, reqErr := CreateRequest("POST", os.Getenv("DOMAIN") + "/identity/v2/auth/password", body)
+func PostAuthForgotPassword(resetPasswordURL, emailTemplate string, body interface{}) (AuthBool, error) {
+	data := new(AuthBool)
+	req, reqErr := CreateRequest("POST", os.Getenv("DOMAIN")+"/identity/v2/auth/password", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -55,7 +55,7 @@ func PostAuthForgotPassword(resetPasswordURL, emailTemplate string, body interfa
 // To register an account with this function, make sure API secret is set in environment
 func PostAuthUserRegistrationByEmail(verificationURL, emailTemplate, options string, body interface{}) (AuthRegister, error) {
 	data := new(AuthRegister)
-	req, reqErr := CreateRequest("POST", os.Getenv("DOMAIN") + "/identity/v2/auth/register", body)
+	req, reqErr := CreateRequest("POST", os.Getenv("DOMAIN")+"/identity/v2/auth/register", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -78,7 +78,7 @@ func PostAuthUserRegistrationByEmail(verificationURL, emailTemplate, options str
 func PostAuthLoginByEmail(verificationURL, loginURL, emailTemplate,
 	gRecaptchaResponse, options string, body interface{}) (AuthLogin, error) {
 	data := new(AuthLogin)
-	req, reqErr := CreateRequest("POST", os.Getenv("DOMAIN") + "/identity/v2/auth/login", body)
+	req, reqErr := CreateRequest("POST", os.Getenv("DOMAIN")+"/identity/v2/auth/login", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -102,7 +102,7 @@ func PostAuthLoginByEmail(verificationURL, loginURL, emailTemplate,
 func PostAuthLoginByUsername(verificationURL, loginURL, emailTemplate,
 	gRecaptchaResponse, options string, body interface{}) (AuthLogin, error) {
 	data := new(AuthLogin)
-	req, reqErr := CreateRequest("POST", os.Getenv("DOMAIN") + "/identity/v2/auth/login", body)
+	req, reqErr := CreateRequest("POST", os.Getenv("DOMAIN")+"/identity/v2/auth/login", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -123,9 +123,9 @@ func PostAuthLoginByUsername(verificationURL, loginURL, emailTemplate,
 
 // GetAuthCheckEmailAvailability is used to check whether an email exists or not on your site.
 // Post parameters are email: string, password: string and optional securityanswer: string
-func GetAuthCheckEmailAvailability(email string) (AuthEmail, error) {
-	data := new(AuthEmail)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/identity/v2/auth/email", "")
+func GetAuthCheckEmailAvailability(email string) (AuthBool, error) {
+	data := new(AuthBool)
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/identity/v2/auth/email", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -141,9 +141,9 @@ func GetAuthCheckEmailAvailability(email string) (AuthEmail, error) {
 }
 
 // GetAuthCheckUsernameAvailability is used to check the UserName exists or not on your site.
-func GetAuthCheckUsernameAvailability(username string) (AuthUsername, error) {
-	data := new(AuthUsername)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/identity/v2/auth/username", "")
+func GetAuthCheckUsernameAvailability(username string) (AuthBool, error) {
+	data := new(AuthBool)
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/identity/v2/auth/username", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -161,7 +161,7 @@ func GetAuthCheckUsernameAvailability(username string) (AuthUsername, error) {
 // GetAuthReadProfilesByToken retrieves a copy of the user data based on the access_token.
 func GetAuthReadProfilesByToken(authorization string) (AuthProfile, error) {
 	data := new(AuthProfile)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/identity/v2/auth/account", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/identity/v2/auth/account", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -180,7 +180,7 @@ func GetAuthReadProfilesByToken(authorization string) (AuthProfile, error) {
 // by providing the access_token of the user accepting the privacy policy.
 func GetAuthPrivatePolicyAccept(authorization string) (AuthProfile, error) {
 	data := new(AuthProfile)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/identity/v2/auth/privacypolicy/accept", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/identity/v2/auth/privacypolicy/accept", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -196,9 +196,9 @@ func GetAuthPrivatePolicyAccept(authorization string) (AuthProfile, error) {
 }
 
 // GetAuthSendWelcomeEmail will send the welcome email.
-func GetAuthSendWelcomeEmail(welcomeEmailTemplate, authorization string) (AuthProfile, error) {
-	data := new(AuthProfile)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/identity/v2/auth/account/sendwelcomeemail", "")
+func GetAuthSendWelcomeEmail(welcomeEmailTemplate, authorization string) (AuthBool, error) {
+	data := new(AuthBool)
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/identity/v2/auth/account/sendwelcomeemail", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -218,7 +218,7 @@ func GetAuthSendWelcomeEmail(welcomeEmailTemplate, authorization string) (AuthPr
 // the raas profile of the second account from getting created.
 func GetAuthSocialIdentity(authorization string) (AuthProfile, error) {
 	data := new(AuthProfile)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/identity/v2/auth/socialidentity", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/identity/v2/auth/socialidentity", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -236,7 +236,7 @@ func GetAuthSocialIdentity(authorization string) (AuthProfile, error) {
 // GetAuthValidateAccessToken validates access token, if valid then returns a response with its expiry otherwise error.
 func GetAuthValidateAccessToken(authorization string) (AuthAccessToken, error) {
 	data := new(AuthAccessToken)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/identity/v2/auth/access_token/validate", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/identity/v2/auth/access_token/validate", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -257,7 +257,7 @@ func GetAuthValidateAccessToken(authorization string) (AuthAccessToken, error) {
 // LoginRadius Dashboard's Email Workflow settings under 'Verification Email'.
 func GetAuthVerifyEmail(verificationToken, url, welcomeEmailTemplate string) (AuthEmail, error) {
 	data := new(AuthEmail)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/identity/v2/auth/email", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/identity/v2/auth/email", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -275,9 +275,9 @@ func GetAuthVerifyEmail(verificationToken, url, welcomeEmailTemplate string) (Au
 }
 
 // GetAuthDeleteAccount is used to delete an account by passing it a delete token.
-func GetAuthDeleteAccount(deleteToken string) (AuthProfile, error) {
-	data := new(AuthProfile)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/identity/v2/auth/account/delete", "")
+func GetAuthDeleteAccount(deleteToken string) (AuthBool, error) {
+	data := new(AuthBool)
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/identity/v2/auth/account/delete", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -293,9 +293,9 @@ func GetAuthDeleteAccount(deleteToken string) (AuthProfile, error) {
 }
 
 // GetAuthInvalidateAccessToken invalidates the active access_token or expires an access token's validity.
-func GetAuthInvalidateAccessToken(authorization string) (AuthAccessToken, error) {
-	data := new(AuthAccessToken)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/identity/v2/auth/access_token/invalidate", "")
+func GetAuthInvalidateAccessToken(authorization string) (AuthBool, error) {
+	data := new(AuthBool)
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/identity/v2/auth/access_token/invalidate", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -314,7 +314,7 @@ func GetAuthInvalidateAccessToken(authorization string) (AuthAccessToken, error)
 // list of questions that are configured on the respective LoginRadius site.
 func GetAuthSecurityQuestionByAccessToken(authorization string) (AuthSecurityQuestion, error) {
 	data := new(AuthSecurityQuestion)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/identity/v2/auth/securityquestion/accesstoken", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/identity/v2/auth/securityquestion/accesstoken", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -333,7 +333,7 @@ func GetAuthSecurityQuestionByAccessToken(authorization string) (AuthSecurityQue
 // list of questions that are configured on the respective LoginRadius site.
 func GetAuthSecurityQuestionByEmail(email string) (AuthSecurityQuestion, error) {
 	data := new(AuthSecurityQuestion)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/identity/v2/auth/securityquestion/email", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/identity/v2/auth/securityquestion/email", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -352,7 +352,7 @@ func GetAuthSecurityQuestionByEmail(email string) (AuthSecurityQuestion, error) 
 // list of questions that are configured on the respective LoginRadius site.
 func GetAuthSecurityQuestionByUsername(username string) (AuthSecurityQuestion, error) {
 	data := new(AuthSecurityQuestion)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/identity/v2/auth/securityquestion/username", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/identity/v2/auth/securityquestion/username", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -371,7 +371,7 @@ func GetAuthSecurityQuestionByUsername(username string) (AuthSecurityQuestion, e
 // list of questions that are configured on the respective LoginRadius site.
 func GetAuthSecurityQuestionByPhone(phone string) (AuthSecurityQuestion, error) {
 	data := new(AuthSecurityQuestion)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/identity/v2/auth/securityquestion/phone", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/identity/v2/auth/securityquestion/phone", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -391,7 +391,7 @@ func GetAuthSecurityQuestionByPhone(phone string) (AuthSecurityQuestion, error) 
 // optional qq_captcha_randstr: string and optional g-recaptcha-response:string
 func PutAuthVerifyEmailByOtp(url, welcomeEmailTemplate string, body interface{}) (AuthEmail, error) {
 	data := new(AuthEmail)
-	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN") + "/identity/v2/auth/email", body)
+	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN")+"/identity/v2/auth/email", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -409,9 +409,9 @@ func PutAuthVerifyEmailByOtp(url, welcomeEmailTemplate string, body interface{})
 
 // PutAuthChangePassword is used to change the accounts password based on the previous password.
 // Post parameters include oldpassword: string and newpassword: string
-func PutAuthChangePassword(authorization string, body interface{}) (AuthPassword, error) {
-	data := new(AuthPassword)
-	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN") + "/identity/v2/auth/password/change", body)
+func PutAuthChangePassword(authorization string, body interface{}) (AuthBool, error) {
+	data := new(AuthBool)
+	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN")+"/identity/v2/auth/password/change", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -429,9 +429,9 @@ func PutAuthChangePassword(authorization string, body interface{}) (AuthPassword
 // PutAuthLinkSocialIdentities is used to link up a social provider account with the specified
 // account based on the access token and the social providers user access token.
 // Post parameter is the candidatetoken: string
-func PutAuthLinkSocialIdentities(authorization string, body interface{}) (AuthProfile, error) {
-	data := new(AuthProfile)
-	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN") + "/identity/v2/auth/socialidentity", body)
+func PutAuthLinkSocialIdentities(authorization string, body interface{}) (AuthBool, error) {
+	data := new(AuthBool)
+	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN")+"/identity/v2/auth/socialidentity", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -448,9 +448,9 @@ func PutAuthLinkSocialIdentities(authorization string, body interface{}) (AuthPr
 
 // PutResendEmailVerification resends the verification email to the user.
 // Post parameter is the email: string
-func PutResendEmailVerification(verificationURL, emailTemplate string, body interface{}) (AuthRegister, error) {
-	data := new(AuthRegister)
-	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN") + "/identity/v2/auth/register", body)
+func PutResendEmailVerification(verificationURL, emailTemplate string, body interface{}) (AuthBool, error) {
+	data := new(AuthBool)
+	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN")+"/identity/v2/auth/register", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -469,9 +469,9 @@ func PutResendEmailVerification(verificationURL, emailTemplate string, body inte
 // PutAuthResetPasswordByResetToken is used to set a new password for the specified account.
 // Post parameters are the resettoken: string, password: string, optional welcomeemailtemplate: string
 // and optional resetpasswordemailtemplate: string
-func PutAuthResetPasswordByResetToken(body interface{}) (AuthPassword, error) {
-	data := new(AuthPassword)
-	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN") + "/identity/v2/auth/password/reset", body)
+func PutAuthResetPasswordByResetToken(body interface{}) (AuthBool, error) {
+	data := new(AuthBool)
+	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN")+"/identity/v2/auth/password/reset", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -488,9 +488,9 @@ func PutAuthResetPasswordByResetToken(body interface{}) (AuthPassword, error) {
 // PutAuthResetPasswordByOTP is used to set a new password for the specified account.
 // Post parameters are the password: string, otp: string, email: string,
 // optional welcomeemailtemplate: string and optional resetpasswordemailtemplate: string
-func PutAuthResetPasswordByOTP(body interface{}) (AuthPassword, error) {
-	data := new(AuthPassword)
-	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN") + "/identity/v2/auth/password/reset", body)
+func PutAuthResetPasswordByOTP(body interface{}) (AuthBool, error) {
+	data := new(AuthBool)
+	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN")+"/identity/v2/auth/password/reset", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -507,9 +507,9 @@ func PutAuthResetPasswordByOTP(body interface{}) (AuthPassword, error) {
 // PutAuthResetPasswordBySecurityAnswerAndEmail is used to reset password for the specified account by security question.
 // Post parameters are the password: string, email: string, securityanswer: string
 // and optional resetpasswordemailtemplate: string
-func PutAuthResetPasswordBySecurityAnswerAndEmail(body interface{}) (AuthPassword, error) {
-	data := new(AuthPassword)
-	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN") + "/identity/v2/auth/password/securityanswer", body)
+func PutAuthResetPasswordBySecurityAnswerAndEmail(body interface{}) (AuthBool, error) {
+	data := new(AuthBool)
+	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN")+"/identity/v2/auth/password/securityanswer", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -526,9 +526,9 @@ func PutAuthResetPasswordBySecurityAnswerAndEmail(body interface{}) (AuthPasswor
 // PutAuthResetPasswordBySecurityAnswerAndPhone is used to reset password for the specified account by security question.
 // Post parameters are the password: string, phone: string, securityanswer: string
 // and optional resetpasswordemailtemplate: string
-func PutAuthResetPasswordBySecurityAnswerAndPhone(body interface{}) (AuthPassword, error) {
-	data := new(AuthPassword)
-	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN") + "/identity/v2/auth/password/securityanswer", body)
+func PutAuthResetPasswordBySecurityAnswerAndPhone(body interface{}) (AuthBool, error) {
+	data := new(AuthBool)
+	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN")+"/identity/v2/auth/password/securityanswer", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -545,9 +545,9 @@ func PutAuthResetPasswordBySecurityAnswerAndPhone(body interface{}) (AuthPasswor
 // PutAuthResetPasswordBySecurityAnswerAndUsername is used to reset password for the specified account by security question.
 // Post parameters are the password: string, username: string, securityanswer: string
 // and optional resetpasswordemailtemplate: string
-func PutAuthResetPasswordBySecurityAnswerAndUsername(body interface{}) (AuthPassword, error) {
-	data := new(AuthPassword)
-	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN") + "/identity/v2/auth/password/securityanswer", body)
+func PutAuthResetPasswordBySecurityAnswerAndUsername(body interface{}) (AuthBool, error) {
+	data := new(AuthBool)
+	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN")+"/identity/v2/auth/password/securityanswer", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -563,9 +563,9 @@ func PutAuthResetPasswordBySecurityAnswerAndUsername(body interface{}) (AuthPass
 
 // PutAuthSetOrChangeUsername is used to set or change UserName by access token.
 // Post parameter is username: string
-func PutAuthSetOrChangeUsername(authorization string, body interface{}) (AuthUsername, error) {
-	data := new(AuthUsername)
-	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN") + "/identity/v2/auth/username", body)
+func PutAuthSetOrChangeUsername(authorization string, body interface{}) (AuthBool, error) {
+	data := new(AuthBool)
+	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN")+"/identity/v2/auth/username", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -585,7 +585,7 @@ func PutAuthSetOrChangeUsername(authorization string, body interface{}) (AuthUse
 func PutAuthUpdateProfileByToken(verificationURL, emailTemplate,
 	smsTemplate, authorization string, body interface{}) (AuthUpdate, error) {
 	data := new(AuthUpdate)
-	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN") + "/identity/v2/auth/account", body)
+	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN")+"/identity/v2/auth/account", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -607,7 +607,7 @@ func PutAuthUpdateProfileByToken(verificationURL, emailTemplate,
 // Post parameter is the securityquestionanswer: string
 func PutAuthUpdateSecurityQuestionByAccessToken(authorization string, body interface{}) (AuthUpdate, error) {
 	data := new(AuthUpdate)
-	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN") + "/identity/v2/auth/account", body)
+	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN")+"/identity/v2/auth/account", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -623,9 +623,9 @@ func PutAuthUpdateSecurityQuestionByAccessToken(authorization string, body inter
 }
 
 // DeleteAuthDeleteAccountEmailConfirmation deletes a user account by passing the user's access token.
-func DeleteAuthDeleteAccountEmailConfirmation(deleteURL, emailTemplate, authorization string) (AuthProfile, error) {
-	data := new(AuthProfile)
-	req, reqErr := CreateRequest("DELETE", os.Getenv("DOMAIN") + "/identity/v2/auth/account", "")
+func DeleteAuthDeleteAccountEmailConfirmation(deleteURL, emailTemplate, authorization string) (AuthBool, error) {
+	data := new(AuthBool)
+	req, reqErr := CreateRequest("DELETE", os.Getenv("DOMAIN")+"/identity/v2/auth/account", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -644,9 +644,9 @@ func DeleteAuthDeleteAccountEmailConfirmation(deleteURL, emailTemplate, authoriz
 
 // DeleteAuthRemoveEmail is used to remove additional emails from a user's account.
 // Post parameter is the e-mail that is to be removed.
-func DeleteAuthRemoveEmail(authorization string, body interface{}) (AuthEmail, error) {
-	req, reqErr := CreateRequest("DELETE", os.Getenv("DOMAIN") + "/identity/v2/auth/email", body)
-	data := new(AuthEmail)
+func DeleteAuthRemoveEmail(authorization string, body interface{}) (AuthBool, error) {
+	data := new(AuthBool)
+	req, reqErr := CreateRequest("DELETE", os.Getenv("DOMAIN")+"/identity/v2/auth/email", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -664,9 +664,9 @@ func DeleteAuthRemoveEmail(authorization string, body interface{}) (AuthEmail, e
 // DeleteAuthUnlinkSocialIdentities is used to unlink up a social provider account with the specified account
 // based on the access token and the social providers user access token.
 // The unlinked account will automatically get removed from your database.
-func DeleteAuthUnlinkSocialIdentities(authorization string, body interface{}) (AuthProfile, error) {
-	req, reqErr := CreateRequest("DELETE", os.Getenv("DOMAIN") + "/identity/v2/auth/socialidentity", body)
-	data := new(AuthProfile)
+func DeleteAuthUnlinkSocialIdentities(authorization string, body interface{}) (AuthBool, error) {
+	data := new(AuthBool)
+	req, reqErr := CreateRequest("DELETE", os.Getenv("DOMAIN")+"/identity/v2/auth/socialidentity", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -682,9 +682,9 @@ func DeleteAuthUnlinkSocialIdentities(authorization string, body interface{}) (A
 }
 
 // GetPasswordlessLoginByEmail is used to send a Passwordless Login verification link to the provided Email ID.
-func GetPasswordlessLoginByEmail(email, passwordlessLoginTemplate, verificationURL string) (AuthPassword, error) {
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/identity/v2/auth/login/passwordlesslogin/email", "")
-	data := new(AuthPassword)
+func GetPasswordlessLoginByEmail(email, passwordlessLoginTemplate, verificationURL string) (AuthBool, error) {
+	data := new(AuthBool)
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/identity/v2/auth/login/passwordlesslogin/email", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -701,10 +701,30 @@ func GetPasswordlessLoginByEmail(email, passwordlessLoginTemplate, verificationU
 	return *data, err
 }
 
+// GetPasswordlessLoginByUsername is used to send a Passwordless Login verification link to the provided Username.
+func GetPasswordlessLoginByUsername(username, passwordlessLoginTemplate, verificationURL string) (AuthBool, error) {
+	data := new(AuthBool)
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/identity/v2/auth/login/passwordlesslogin/email", "")
+	if reqErr != nil {
+		return *data, reqErr
+	}
+
+	q := req.URL.Query()
+	q.Add("apikey", os.Getenv("APIKEY"))
+	q.Add("username", username)
+	q.Add("passwordlesslogintemplate", passwordlessLoginTemplate)
+	q.Add("verificationurl", verificationURL)
+	req.URL.RawQuery = q.Encode()
+	req.Header.Add("content-Type", "application/x-www-form-urlencoded")
+
+	err := RunRequest(req, data)
+	return *data, err
+}
+
 // GetPasswordlessLoginVerification is used to verify the Passwordless Login verification link.
 func GetPasswordlessLoginVerification(verificationToken, welcomeEmailTemplate string) (AuthLogin, error) {
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/identity/v2/auth/login/passwordlesslogin/email/verify", "")
 	data := new(AuthLogin)
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/identity/v2/auth/login/passwordlesslogin/email/verify", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}

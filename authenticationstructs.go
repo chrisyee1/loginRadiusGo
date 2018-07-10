@@ -784,11 +784,6 @@ type AuthEmail struct {
 	} `json:"Data"`
 }
 
-// AuthPassword is a struct for the Authorization Password Endpoint response
-type AuthPassword struct {
-	IsPosted bool `json:"IsPosted"`
-}
-
 // AuthRegister is a struct for the Authorization Register Endpoint response
 type AuthRegister struct {
 	IsPosted bool `json:"IsPosted"`
@@ -802,10 +797,12 @@ type AuthLogin struct {
 	ExpiresIn   TimeAlt     `json:"expires_in"`
 }
 
-// AuthUsername is a struct for the Authorization Username Endpoint response
-type AuthUsername struct {
-	IsExist  bool `json:"IsExist"`
-	IsPosted bool `json:"IsPosted"`
+// AuthBool is a struct for the Authorization Endpoints that return a boolean reply
+type AuthBool struct {
+	IsExist                 bool `json:"IsExist"`
+	IsPosted                bool `json:"IsPosted"`
+	IsDeleted               bool `json:"IsDeleted"`
+	IsDeleteRequestAccepted bool `json:"IsDeleteRequestAccepted`
 }
 
 // AuthAccessToken is a struct for the Authorization AccessToken Endpoint response
