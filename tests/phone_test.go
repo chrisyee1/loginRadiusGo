@@ -2,9 +2,9 @@ package test
 
 import (
 	"fmt"
+	"loginradius"
 	"testing"
 	"time"
-	"loginradius"
 )
 
 func unverifyPhone(uid string) {
@@ -79,7 +79,7 @@ func TestPostPhoneUserRegistrationBySMS(t *testing.T) {
 		t.Errorf("Error registering phone number")
 		fmt.Println(err)
 	}
-	user, err2 := loginradius.GetAccountProfilesByEmail(timestampEmail)
+	user, err2 := loginradius.GetManageAccountProfilesByEmail(timestampEmail)
 	if err2 != nil {
 		t.Errorf("Error cleaning up account")
 		fmt.Println(err2)

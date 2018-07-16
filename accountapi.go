@@ -144,9 +144,9 @@ func GetManageAccountPassword(uid string) (AccountPassword, error) {
 	return *data, err
 }
 
-// GetAccountProfilesByEmail is used to retrieve all of the profile data,
+// GetManageAccountProfilesByEmail is used to retrieve all of the profile data,
 // associated with the specified account by email in Cloud Storage.
-func GetAccountProfilesByEmail(email string) (AuthProfile, error) {
+func GetManageAccountProfilesByEmail(email string) (AuthProfile, error) {
 	data := new(AuthProfile)
 	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/identity/v2/manage/account", "")
 	if reqErr != nil {

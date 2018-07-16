@@ -2,9 +2,9 @@ package test
 
 import (
 	"fmt"
+	"loginradius"
 	"testing"
 	"time"
-	"loginradius"
 )
 
 func TestPostManageAccountCreate(t *testing.T) {
@@ -125,11 +125,11 @@ func TestGetManageAccountPassword(t *testing.T) {
 	fmt.Println("Test complete")
 }
 
-func TestGetAccountProfilesByEmail(t *testing.T) {
-	fmt.Println("Starting test TestGetAccountProfilesByEmail")
+func TestGetManageAccountProfilesByEmail(t *testing.T) {
+	fmt.Println("Starting test TestGetManageAccountProfilesByEmail")
 	_, _, testuid, testEmail, teardownTestCase := setupAccount(t)
 	defer teardownTestCase(t)
-	session, err := loginradius.GetAccountProfilesByEmail(testEmail)
+	session, err := loginradius.GetManageAccountProfilesByEmail(testEmail)
 	if err != nil || session.UID != testuid {
 		t.Errorf("Error retrieving profile associated with email")
 		fmt.Println(err)
