@@ -104,7 +104,6 @@ type SecurityQuestionTest struct {
 	SecurityQuestionAnswer SecurityQuestion `json:"securityquestionanswer"`
 }
 
-
 type CandidateToken struct {
 	CandidateToken string `json:"candidatetoken"`
 }
@@ -123,10 +122,6 @@ type TestAccount struct {
 
 type TestPassword struct {
 	Password string
-}
-
-type TestSecurityQuestion struct {
-	Securityquestionanswer map[string]string
 }
 
 type TestFirstName struct {

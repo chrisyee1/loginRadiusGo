@@ -91,6 +91,8 @@ type ServerTime struct {
 		StartTime      string `json:"StartTime"`
 		EndTime        string `json:"EndTime"`
 		TimeDifference string `json:"TimeDifference"`
+		IP             string `json:"IP"`
+		ForwardedIP    string `json:"ForwardedIP"`
 	} `json:"Sott"`
 }
 
@@ -138,7 +140,7 @@ func GetConfiguration() (Configurations, error) {
 // and server time information which is useful when generating an SOTT token.
 func GetServerTime(timeDifference string) (ServerTime, error) {
 	data := new(ServerTime)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/identity/v2/serverinfo", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/identity/v2/serverinfo", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -156,7 +158,7 @@ func GetServerTime(timeDifference string) (ServerTime, error) {
 // GetGenerateSottAPI allows you to generate SOTT with a given expiration time.
 func GetGenerateSottAPI(timeDifference string) (SOTT, error) {
 	data := new(SOTT)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/identity/v2/manage/account/sott", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/identity/v2/manage/account/sott", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -172,7 +174,7 @@ func GetGenerateSottAPI(timeDifference string) (SOTT, error) {
 	return *data, err
 }
 
-// GetActiveSessionDetails is use to get all active seesions by Access Token.
+// GetActiveSessionDetails is use to get all active sessions by Access Token.
 func GetActiveSessionDetails(accessToken string) (ActiveSession, error) {
 	data := new(ActiveSession)
 	req, reqErr := CreateRequest("GET", "http://api.loginradius.com/api/v2/access_token/activesession", "")

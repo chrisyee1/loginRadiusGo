@@ -33,11 +33,11 @@ type PhoneBool struct {
 }
 
 // PostPhoneLogin retrieves a copy of the user data based on the Phone.
-// The post parameters are the phone number: string, password: string
+// The post parameters are the phoneID: string, password: string
 // and an optional securityanswer: string
 func PostPhoneLogin(loginurl, smstemplate, gRecaptchaResponse string, body interface{}) (PhoneLogin, error) {
 	data := new(PhoneLogin)
-	req, reqErr := CreateRequest("POST", os.Getenv("DOMAIN") + "/identity/v2/auth/login", body)
+	req, reqErr := CreateRequest("POST", os.Getenv("DOMAIN")+"/identity/v2/auth/login", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -58,7 +58,7 @@ func PostPhoneLogin(loginurl, smstemplate, gRecaptchaResponse string, body inter
 // The post parameter is phone: string
 func PostPhoneForgotPasswordByOTP(smstemplate string, body interface{}) (PhoneOTP, error) {
 	data := new(PhoneOTP)
-	req, reqErr := CreateRequest("POST", os.Getenv("DOMAIN") + "/identity/v2/auth/password/otp", body)
+	req, reqErr := CreateRequest("POST", os.Getenv("DOMAIN")+"/identity/v2/auth/password/otp", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -77,7 +77,7 @@ func PostPhoneForgotPasswordByOTP(smstemplate string, body interface{}) (PhoneOT
 // The user will receive a verification code that they will need to input. The post parameter is phone: string.
 func PostPhoneResendVerificationOTP(smstemplate string, body interface{}) (PhoneOTP, error) {
 	data := new(PhoneOTP)
-	req, reqErr := CreateRequest("POST", os.Getenv("DOMAIN") + "/identity/v2/auth/phone/otp", body)
+	req, reqErr := CreateRequest("POST", os.Getenv("DOMAIN")+"/identity/v2/auth/phone/otp", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -96,7 +96,7 @@ func PostPhoneResendVerificationOTP(smstemplate string, body interface{}) (Phone
 // user's Phone Number in cases in which an active token already exists. The post parameter is phone: string.
 func PostPhoneResendVerificationOTPByToken(smstemplate, authorization string, body interface{}) (PhoneOTP, error) {
 	data := new(PhoneOTP)
-	req, reqErr := CreateRequest("POST", os.Getenv("DOMAIN") + "/identity/v2/auth/phone/otp", body)
+	req, reqErr := CreateRequest("POST", os.Getenv("DOMAIN")+"/identity/v2/auth/phone/otp", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -116,7 +116,7 @@ func PostPhoneResendVerificationOTPByToken(smstemplate, authorization string, bo
 // The post parameter is a user profile object, userprofileobject:string.
 func PostPhoneUserRegistrationBySMS(verificationURL, smstemplate, options string, body interface{}) (PhoneBool, error) {
 	data := new(PhoneBool)
-	req, reqErr := CreateRequest("POST", os.Getenv("DOMAIN") + "/identity/v2/auth/register", body)
+	req, reqErr := CreateRequest("POST", os.Getenv("DOMAIN")+"/identity/v2/auth/register", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -138,7 +138,7 @@ func PostPhoneUserRegistrationBySMS(verificationURL, smstemplate, options string
 // GetPhoneSendOTP is used to send your phone an OTP.
 func GetPhoneSendOTP(phone, smsTemplate string) (PhoneOTP, error) {
 	data := new(PhoneOTP)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/identity/v2/auth/login/passwordlesslogin/otp", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/identity/v2/auth/login/passwordlesslogin/otp", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -157,7 +157,7 @@ func GetPhoneSendOTP(phone, smsTemplate string) (PhoneOTP, error) {
 // GetPhoneNumberAvailability is used to check the Phone Number exists or not on your site.
 func GetPhoneNumberAvailability(phone string) (PhoneBool, error) {
 	data := new(PhoneBool)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/identity/v2/auth/phone", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/identity/v2/auth/phone", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -176,15 +176,16 @@ func GetPhoneNumberAvailability(phone string) (PhoneBool, error) {
 // The post parameters are phone:string, otp: string, optional smstemplate: string,
 // optional securityanswer: string, optional g-recaptcha-response: string,
 // optional qq_captcha_ticket: string, optional qq_captcha_randstr: string
-func PutPhoneLoginUsingOTP(body interface{}) (PhoneLogin, error) {
+func PutPhoneLoginUsingOTP(smsTemplate string, body interface{}) (PhoneLogin, error) {
 	data := new(PhoneLogin)
-	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN") + "/identity/v2/auth/login/passwordlesslogin/otp/verify", body)
+	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN")+"/identity/v2/auth/login/passwordlesslogin/otp/verify", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
 
 	q := req.URL.Query()
 	q.Add("apikey", os.Getenv("APIKEY"))
+	q.Add("smstemplate", smsTemplate)
 	req.URL.RawQuery = q.Encode()
 	req.Header.Add("content-Type", "application/json")
 
@@ -193,10 +194,10 @@ func PutPhoneLoginUsingOTP(body interface{}) (PhoneLogin, error) {
 }
 
 // PutPhoneNumberUpdate is used to update the login Phone Number of users
-// The post parameter is a phone number, phone:string.
+// The post parameter is a phoneID, phone:string.
 func PutPhoneNumberUpdate(smstemplate, authorization string, body interface{}) (PhoneOTP, error) {
 	data := new(PhoneOTP)
-	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN") + "/identity/v2/auth/phone", body)
+	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN")+"/identity/v2/auth/phone", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -217,7 +218,7 @@ func PutPhoneNumberUpdate(smstemplate, authorization string, body interface{}) (
 // optional smstemplate: string and optional resetpasswordemailtemplate: string
 func PutPhoneResetPasswordByOTP(body interface{}) (PhoneBool, error) {
 	data := new(PhoneBool)
-	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN") + "/identity/v2/auth/password/otp", body)
+	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN")+"/identity/v2/auth/password/otp", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -232,10 +233,10 @@ func PutPhoneResetPasswordByOTP(body interface{}) (PhoneBool, error) {
 }
 
 // PutPhoneVerificationByOTP is used to validate the verification code sent to verify a user's phone number.
-// The post parameter is the phone number, phone:string
+// The post parameter is the phoneID, phone:string
 func PutPhoneVerificationByOTP(otp, smstemplate string, body interface{}) (PhoneLogin, error) {
 	data := new(PhoneLogin)
-	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN") + "/identity/v2/auth/phone/otp", body)
+	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN")+"/identity/v2/auth/phone/otp", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -253,10 +254,10 @@ func PutPhoneVerificationByOTP(otp, smstemplate string, body interface{}) (Phone
 
 // PutPhoneVerificationByOTPByToken is used to consume the verification code sent to verify a user's phone number.
 // Use this call for front-end purposes in cases where the user is already logged in by passing the user's access token.
-// The post parameter is the phone number, phone:string
+// The post parameter is the phoneID, phone:string
 func PutPhoneVerificationByOTPByToken(otp, smstemplate, authorization string) (PhoneBool, error) {
 	data := new(PhoneBool)
-	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN") + "/identity/v2/auth/phone/otp", "")
+	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN")+"/identity/v2/auth/phone/otp", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -273,10 +274,10 @@ func PutPhoneVerificationByOTPByToken(otp, smstemplate, authorization string) (P
 	return *data, err
 }
 
-// PutResetPhoneIDVerification allows you to reset the phone no verification of an end user’s account.
+// PutResetPhoneIDVerification allows you to reset the phone number verification of an end user’s account.
 func PutResetPhoneIDVerification(uid string) (PhoneBool, error) {
 	data := new(PhoneBool)
-	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN") + "/identity/v2/manage/account/"+uid+"/invalidatephone", "")
+	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN")+"/identity/v2/manage/account/"+uid+"/invalidatephone", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -292,7 +293,7 @@ func PutResetPhoneIDVerification(uid string) (PhoneBool, error) {
 // DeleteRemovePhoneIDByAccessToken is used to delete the Phone ID on a user's account via the access_token.
 func DeleteRemovePhoneIDByAccessToken(authorization string) (PhoneBool, error) {
 	data := new(PhoneBool)
-	req, reqErr := CreateRequest("DELETE", os.Getenv("DOMAIN") + "/identity/v2/auth/phone", "")
+	req, reqErr := CreateRequest("DELETE", os.Getenv("DOMAIN")+"/identity/v2/auth/phone", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}

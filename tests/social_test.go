@@ -2,10 +2,10 @@ package test
 
 import (
 	"fmt"
+	"loginradius"
 	"os"
 	"testing"
 	"time"
-	"loginradius"
 )
 
 func setupSocialTests(t *testing.T) (string, string, string) {
@@ -42,12 +42,12 @@ func TestPostSocialMessageAPI(t *testing.T) {
 	fmt.Println("Test complete")
 }
 
-func TestPostSocialStatusPosting(t *testing.T) {
+func TestPostSocialStatusPost(t *testing.T) {
 	fmt.Println("Starting test TestPostSocialStatusPosting")
 	time := time.Now()
 	timestamp := time.Format("20060102150405")
 	_, _, twitter := setupSocialTests(t)
-	_, err := loginradius.PostSocialStatusPosting(twitter, timestamp, timestamp, "Test Image", timestamp, "Test Caption", "Test Desc")
+	_, err := loginradius.PostSocialStatusPost(twitter, timestamp, timestamp, "Test Image", timestamp, "Test Caption", "Test Desc")
 	if err != nil {
 		t.Errorf("Error sending message to provider")
 		fmt.Println(err)

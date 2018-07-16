@@ -10,7 +10,7 @@ import "os"
 // GET & POST Message API work the same way except the API method is different
 func PostSocialMessageAPI(accessToken, to, subject, message string) (SocialMessageAPI, error) {
 	data := new(SocialMessageAPI)
-	req, reqErr := CreateRequest("POST", os.Getenv("DOMAIN") + "/api/v2/message", "")
+	req, reqErr := CreateRequest("POST", os.Getenv("DOMAIN")+"/api/v2/message", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -27,12 +27,12 @@ func PostSocialMessageAPI(accessToken, to, subject, message string) (SocialMessa
 	return *data, err
 }
 
-// PostSocialStatusPosting is used to update the status on the user’s wall.
+// PostSocialStatusPost is used to update the status on the user’s wall.
 // Supported Providers: Facebook, Twitter, LinkedIn
-func PostSocialStatusPosting(accessToken, title, url, imageurl, status, caption,
+func PostSocialStatusPost(accessToken, title, url, imageurl, status, caption,
 	description string) (SocialMessageAPI, error) {
 	data := new(SocialMessageAPI)
-	req, reqErr := CreateRequest("POST", os.Getenv("DOMAIN") + "/api/v2/status", "")
+	req, reqErr := CreateRequest("POST", os.Getenv("DOMAIN")+"/api/v2/status", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -56,7 +56,7 @@ func PostSocialStatusPosting(accessToken, title, url, imageurl, status, caption,
 // returned during authentication into an Access Token that can be used with other API calls.
 func GetSocialAccessToken(token string) (SocialAccessToken, error) {
 	data := new(SocialAccessToken)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/api/v2/access_token", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/api/v2/access_token", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -113,7 +113,7 @@ func GetSocialAccessTokenInvalidate(accessToken string) (SocialAccessToken, erro
 // Supported Providers: Facebook, Google, Live, Vkontakte.
 func GetSocialAlbum(accessToken string) (SocialAlbum, error) {
 	data := new(SocialAlbum)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/api/v2/album", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/api/v2/album", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -131,7 +131,7 @@ func GetSocialAlbum(accessToken string) (SocialAlbum, error) {
 // Supported Providers: Live, Vkontakte
 func GetSocialAudio(accessToken string) (SocialAudio, error) {
 	data := new(SocialAudio)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/api/v2/audio", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/api/v2/audio", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -149,7 +149,7 @@ func GetSocialAudio(accessToken string) (SocialAudio, error) {
 // Supported Providers: Facebook, Foursquare, Vkontakte
 func GetSocialCheckin(accessToken string) (SocialCheckin, error) {
 	data := new(SocialCheckin)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/api/v2/checkin", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/api/v2/checkin", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -167,7 +167,7 @@ func GetSocialCheckin(accessToken string) (SocialCheckin, error) {
 // Supported Providers: Facebook, LinkedIn
 func GetSocialCompany(accessToken string) (SocialCompany, error) {
 	data := new(SocialCompany)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/api/v2/company", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/api/v2/company", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -190,7 +190,7 @@ func GetSocialCompany(accessToken string) (SocialCompany, error) {
 // Supported Providers: Facebook, Foursquare, Google, LinkedIn, Live, Twitter, Vkontakte, Yahoo
 func GetSocialContact(accessToken string) (SocialContact, error) {
 	data := new(SocialContact)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/api/v2/contact", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/api/v2/contact", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -208,7 +208,7 @@ func GetSocialContact(accessToken string) (SocialContact, error) {
 // Supported Providers: Facebook, Live
 func GetSocialEvent(accessToken string) (SocialEvent, error) {
 	data := new(SocialEvent)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/api/v2/event", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/api/v2/event", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -226,7 +226,7 @@ func GetSocialEvent(accessToken string) (SocialEvent, error) {
 // Supported Providers: Twitter
 func GetSocialFollowing(accessToken string) (SocialFollowing, error) {
 	data := new(SocialFollowing)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/api/v2/following", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/api/v2/following", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -244,7 +244,7 @@ func GetSocialFollowing(accessToken string) (SocialFollowing, error) {
 // Supported Providers: Facebook, Vkontakte
 func GetSocialGroup(accessToken string) (SocialGroup, error) {
 	data := new(SocialGroup)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/api/v2/group", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/api/v2/group", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -262,7 +262,7 @@ func GetSocialGroup(accessToken string) (SocialGroup, error) {
 // Supported Providers: Facebook
 func GetSocialLike(accessToken string) (SocialLike, error) {
 	data := new(SocialLike)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/api/v2/like", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/api/v2/like", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -280,7 +280,7 @@ func GetSocialLike(accessToken string) (SocialLike, error) {
 // Supported Providers: Facebook
 func GetSocialMention(accessToken string) (SocialMention, error) {
 	data := new(SocialMention)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/api/v2/mention", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/api/v2/mention", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -302,7 +302,7 @@ func GetSocialMention(accessToken string) (SocialMention, error) {
 // GET & POST Message API work the same way except the API method is different
 func GetSocialMessageAPI(accessToken, to, subject, message string) (SocialMessageAPI, error) {
 	data := new(SocialMessageAPI)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/api/v2/message", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/api/v2/message", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -323,7 +323,7 @@ func GetSocialMessageAPI(accessToken, to, subject, message string) (SocialMessag
 // Supported Providers: Facebook, LinkedIn
 func GetSocialPage(accessToken, pagename string) (SocialPage, error) {
 	data := new(SocialPage)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/api/v2/page", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/api/v2/page", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -342,7 +342,7 @@ func GetSocialPage(accessToken, pagename string) (SocialPage, error) {
 // Supported Providers: Facebook, LinkedIn
 func GetSocialPhoto(accessToken, albumid string) (SocialPhoto, error) {
 	data := new(SocialPhoto)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/api/v2/photo", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/api/v2/photo", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -361,7 +361,7 @@ func GetSocialPhoto(accessToken, albumid string) (SocialPhoto, error) {
 // Supported Providers: Facebook
 func GetSocialPost(accessToken string) (SocialPost, error) {
 	data := new(SocialPost)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/api/v2/post", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/api/v2/post", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -379,7 +379,7 @@ func GetSocialPost(accessToken string) (SocialPost, error) {
 // Supported Providers: Facebook, LinkedIn, Twitter, Vkontakte
 func GetSocialStatusFetch(accessToken string) (SocialStatus, error) {
 	data := new(SocialStatus)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/api/v2/status", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/api/v2/status", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -398,7 +398,7 @@ func GetSocialStatusFetch(accessToken string) (SocialStatus, error) {
 func GetSocialStatusPost(accessToken, title, url, imageurl, status,
 	caption, description string) (SocialMessageAPI, error) {
 	data := new(SocialMessageAPI)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/api/v2/status/js", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/api/v2/status/js", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -422,7 +422,7 @@ func GetSocialStatusPost(accessToken, title, url, imageurl, status,
 // Supported Providers: All
 func GetSocialUserProfile(accessToken string) (AuthProfile, error) {
 	data := new(AuthProfile)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/api/v2/userprofile", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/api/v2/userprofile", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -440,7 +440,7 @@ func GetSocialUserProfile(accessToken string) (AuthProfile, error) {
 // Supported Providers: All
 func GetSocialVideo(accessToken, nextcursor string) (SocialVideo, error) {
 	data := new(SocialVideo)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/api/v2/video", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/api/v2/video", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}

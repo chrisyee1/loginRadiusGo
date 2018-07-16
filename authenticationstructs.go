@@ -10,14 +10,14 @@ type AuthProfile struct {
 	VerificationToken       string            `json:"VerificationToken"`
 	ForgotToken             string            `json:"ForgotToken"`
 	IsDeleteRequestAccepted bool              `json:"IsDeleteRequestAccepted"`
-	Identities              []Identities      `json:"Identities"`
+	Identities              []json.RawMessage `json:"Identities"`
 	UserName                string            `json:"UserName"`
 	UID                     string            `json:"Uid"`
 	PasswordExpirationDate  TimeAlt           `json:"PasswordExpirationDate"`
 	Password                string            `json:"Password"`
 	LastPasswordChangeDate  TimeAlt           `json:"LastPasswordChangeDate"`
 	PreviousUids            []string          `json:"PreviousUids"`
-	CustomFields            map[string]string `json:"CustomFields"`
+	CustomFields            json.RawMessage `json:"CustomFields"`
 	LastPasswordChangeToken string            `json:"LastPasswordChangeToken"`
 	PhoneID                 string            `json:"phoneId"`
 	ExternalUserLoginID     string            `json:"ExternalUserLoginId"`
@@ -248,7 +248,7 @@ type AuthProfile struct {
 	PublicRepository string `json:"PublicRepository"`
 	Hireable         bool   `json:"Hireable"`
 	RepositoryURL    string `json:"RepositoryUrl"`
-	Age              int    `json:"Age"`
+	Age              string `json:"Age"`
 	Patents          []struct {
 		ID    string  `json:"Id"`
 		Title string  `json:"Title"`
@@ -623,7 +623,7 @@ type Identities struct {
 	PublicRepository string `json:"PublicRepository"`
 	Hireable         bool   `json:"Hireable"`
 	RepositoryURL    string `json:"RepositoryUrl"`
-	Age              int    `json:"Age"`
+	Age              string `json:"Age"`
 	Patents          []struct {
 		ID    string  `json:"Id"`
 		Title string  `json:"Title"`
@@ -769,6 +769,7 @@ type Identities struct {
 	SignupDate          TimeAlt  `json:"SignupDate"`
 	LastLoginDate       TimeAlt  `json:"LastLoginDate"`
 	Roles               []string `json:"Roles"`
+	Medium              string
 }
 
 // AuthEmail is a struct for the Authorization Email Endpoint response
@@ -802,7 +803,7 @@ type AuthBool struct {
 	IsExist                 bool `json:"IsExist"`
 	IsPosted                bool `json:"IsPosted"`
 	IsDeleted               bool `json:"IsDeleted"`
-	IsDeleteRequestAccepted bool `json:"IsDeleteRequestAccepted`
+	IsDeleteRequestAccepted bool `json:"IsDeleteRequestAccepted"`
 }
 
 // AuthAccessToken is a struct for the Authorization AccessToken Endpoint response

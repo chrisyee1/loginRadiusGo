@@ -61,7 +61,7 @@ type MFAIsDeleted struct {
 // The post parameters are the email: string and password: string
 func PostMFAEmailLogin(loginURL, verificationURL, emailTemplate, smstemplate2fa string, body interface{}) (MFAPost, error) {
 	data := new(MFAPost)
-	req, reqErr := CreateRequest("POST", os.Getenv("DOMAIN") + "/identity/v2/auth/login/2fa", body)
+	req, reqErr := CreateRequest("POST", os.Getenv("DOMAIN")+"/identity/v2/auth/login/2fa", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -84,7 +84,7 @@ func PostMFAEmailLogin(loginURL, verificationURL, emailTemplate, smstemplate2fa 
 func PostMFAUsernameLogin(loginURL, verificationURL, emailTemplate,
 	smsTemplate, smstemplate2fa string, body interface{}) (MFAPost, error) {
 	data := new(MFAPost)
-	req, reqErr := CreateRequest("POST", os.Getenv("DOMAIN") + "/identity/v2/auth/login/2fa", body)
+	req, reqErr := CreateRequest("POST", os.Getenv("DOMAIN")+"/identity/v2/auth/login/2fa", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -111,7 +111,7 @@ func PostMFAUsernameLogin(loginURL, verificationURL, emailTemplate,
 func PostMFAPhoneLogin(loginURL, verificationURL, emailTemplate,
 	smsTemplate, smstemplate2fa string, body interface{}) (MFAPost, error) {
 	data := new(MFAPost)
-	req, reqErr := CreateRequest("POST", os.Getenv("DOMAIN") + "/identity/v2/auth/login/2fa", body)
+	req, reqErr := CreateRequest("POST", os.Getenv("DOMAIN")+"/identity/v2/auth/login/2fa", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -134,7 +134,7 @@ func PostMFAPhoneLogin(loginURL, verificationURL, emailTemplate,
 // after login by using the access_token when MFA is set as optional on the LoginRadius site.
 func GetMFAValidateAccessToken(smstemplate2fa, authorization string) (MFAValidate, error) {
 	data := new(MFAValidate)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/identity/v2/auth/account/2fa", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/identity/v2/auth/account/2fa", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -158,7 +158,7 @@ func GetMFAValidateAccessToken(smstemplate2fa, authorization string) (MFAValidat
 // configured in the Dashboard then the account gets blocked automatically
 func GetMFABackUpCodeByAccessToken(authorization string) (MFABackUpCodes, error) {
 	data := new(MFABackUpCodes)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/identity/v2/auth/account/2fa/backupcode", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/identity/v2/auth/account/2fa/backupcode", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -177,7 +177,7 @@ func GetMFABackUpCodeByAccessToken(authorization string) (MFABackUpCodes, error)
 // This API call will generate 10 new codes, each code can only be consumed once.
 func GetMFAResetBackUpCodeByAccessToken(authorization string) (MFABackUpCodes, error) {
 	data := new(MFABackUpCodes)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/identity/v2/auth/account/2fa/backupcode/reset", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/identity/v2/auth/account/2fa/backupcode/reset", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -198,7 +198,7 @@ func GetMFAResetBackUpCodeByAccessToken(authorization string) (MFABackUpCodes, e
 // number of invalid login attempts configured in the Dashboard then the account gets blocked automatically
 func GetMFABackUpCodeByUID(uid string) (MFABackUpCodes, error) {
 	data := new(MFABackUpCodes)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/identity/v2/manage/account/2fa/backupcode", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/identity/v2/manage/account/2fa/backupcode", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -218,7 +218,7 @@ func GetMFABackUpCodeByUID(uid string) (MFABackUpCodes, error) {
 // This API call will generate 10 new codes, each code can only be consumed once.
 func GetMFAResetBackUpCodeByUID(uid string) (MFABackUpCodes, error) {
 	data := new(MFABackUpCodes)
-	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN") + "/identity/v2/manage/account/2fa/backupcode/reset", "")
+	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/identity/v2/manage/account/2fa/backupcode/reset", "")
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -241,7 +241,7 @@ func GetMFAResetBackUpCodeByUID(uid string) (MFABackUpCodes, error) {
 // Post parameter is the backupcode: string for logging in
 func PutMFAValidateBackupCode(secondFactorAuthenticationToken string, body interface{}) (MFALogin, error) {
 	data := new(MFALogin)
-	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN") + "/identity/v2/auth/login/2fa/verification/backupcode", body)
+	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN")+"/identity/v2/auth/login/2fa/verification/backupcode", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -261,7 +261,7 @@ func PutMFAValidateBackupCode(secondFactorAuthenticationToken string, body inter
 // qq_captcha_randstr: string and optional g-recaptcha-response: string
 func PutMFAValidateOTP(secondFactorAuthenticationToken, smstemplate2fa string, body interface{}) (MFALogin, error) {
 	data := new(MFALogin)
-	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN") + "/identity/v2/auth/login/2fa/verification/otp", body)
+	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN")+"/identity/v2/auth/login/2fa/verification/otp", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -281,7 +281,7 @@ func PutMFAValidateOTP(secondFactorAuthenticationToken, smstemplate2fa string, b
 // Post parameter is googleauthenticatorcode: string
 func PutMFAValidateGoogleAuthCode(secondFactorAuthenticationToken, smstemplate2fa string, body interface{}) (MFALogin, error) {
 	data := new(MFALogin)
-	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN") + "/identity/v2/auth/login/2fa/verification/googleauthenticatorcode", body)
+	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN")+"/identity/v2/auth/login/2fa/verification/googleauthenticatorcode", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -301,7 +301,7 @@ func PutMFAValidateGoogleAuthCode(secondFactorAuthenticationToken, smstemplate2f
 // Post parameter is phone number needing upgrade, phoneno2fa : string
 func PutMFAUpdatePhoneNumber(secondFactorAuthenticationToken, smstemplate2fa string, body interface{}) (MFAPhone, error) {
 	data := new(MFAPhone)
-	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN") + "/identity/v2/auth/login/2fa", body)
+	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN")+"/identity/v2/auth/login/2fa", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -322,7 +322,7 @@ func PutMFAUpdatePhoneNumber(secondFactorAuthenticationToken, smstemplate2fa str
 // Post parameter is phone number needing upgrade, phoneno2fa : string
 func PutMFAUpdatePhoneNumberByToken(smstemplate2fa, authorization string, body interface{}) (MFAPhone, error) {
 	data := new(MFAPhone)
-	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN") + "/identity/v2/auth/account/2fa", body)
+	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN")+"/identity/v2/auth/account/2fa", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -338,11 +338,31 @@ func PutMFAUpdatePhoneNumberByToken(smstemplate2fa, authorization string, body i
 	return *data, err
 }
 
+// PutMFAUpdateByToken is used to trigger the Multi-factor authentication settings after login for secure actions.
+// Post parameter is the google authenticator code.
+func PutMFAUpdateByToken(smsTemplate, authorization string, body interface{}) (AuthProfile, error) {
+	data := new(AuthProfile)
+	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN")+"/identity/v2/auth/account/2fa/verification/googleauthenticatorcode", body)
+	if reqErr != nil {
+		return *data, reqErr
+	}
+
+	q := req.URL.Query()
+	q.Add("apikey", os.Getenv("APIKEY"))
+	q.Add("smstemplate", smsTemplate)
+	req.URL.RawQuery = q.Encode()
+	req.Header.Add("content-Type", "application/json")
+	req.Header.Add("Authorization", "Bearer "+authorization)
+
+	err := RunRequest(req, data)
+	return *data, err
+}
+
 // PutMFAUpdateSettings is used to trigger the Multi-factor authentication settings after login for secure actions.
 // Post parameter is the OTP.
 func PutMFAUpdateSettings(authorization string, body interface{}) (AuthProfile, error) {
 	data := new(AuthProfile)
-	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN") + "/identity/v2/auth/account/2fa/verification/otp", body)
+	req, reqErr := CreateRequest("PUT", os.Getenv("DOMAIN")+"/identity/v2/auth/account/2fa/verification/otp", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -361,7 +381,7 @@ func PutMFAUpdateSettings(authorization string, body interface{}) (AuthProfile, 
 // Post parameter is authenticator: string; pass 'googleauthenticator' to remove the Authenticator.
 func DeleteMFAResetGoogleAuthenticatorByToken(authorization string, body interface{}) (MFAIsDeleted, error) {
 	data := new(MFAIsDeleted)
-	req, reqErr := CreateRequest("DELETE", os.Getenv("DOMAIN") + "/identity/v2/auth/account/2fa/authenticator", body)
+	req, reqErr := CreateRequest("DELETE", os.Getenv("DOMAIN")+"/identity/v2/auth/account/2fa/authenticator", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -380,7 +400,7 @@ func DeleteMFAResetGoogleAuthenticatorByToken(authorization string, body interfa
 // Post parameter is authenticator: string; pass 'otpauthenticator' to remove the Authenticator.
 func DeleteMFAResetSMSAuthenticatorByToken(authorization string, body interface{}) (MFAIsDeleted, error) {
 	data := new(MFAIsDeleted)
-	req, reqErr := CreateRequest("DELETE", os.Getenv("DOMAIN") + "/identity/v2/auth/account/2fa/authenticator", body)
+	req, reqErr := CreateRequest("DELETE", os.Getenv("DOMAIN")+"/identity/v2/auth/account/2fa/authenticator", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -399,7 +419,7 @@ func DeleteMFAResetSMSAuthenticatorByToken(authorization string, body interface{
 // Post parameter is authenticator: string; pass 'googleauthenticator' to remove the Authenticator.
 func DeleteMFAResetGoogleAuthenticatorByUID(uid string, body interface{}) (MFAIsDeleted, error) {
 	data := new(MFAIsDeleted)
-	req, reqErr := CreateRequest("DELETE", os.Getenv("DOMAIN") + "/identity/v2/manage/account/2fa/authenticator", body)
+	req, reqErr := CreateRequest("DELETE", os.Getenv("DOMAIN")+"/identity/v2/manage/account/2fa/authenticator", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}
@@ -419,7 +439,7 @@ func DeleteMFAResetGoogleAuthenticatorByUID(uid string, body interface{}) (MFAIs
 // Post parameter is authenticator: string; pass 'otpauthenticator' to remove the Authenticator.
 func DeleteMFAResetSMSAuthenticatorByUID(uid string, body interface{}) (MFAIsDeleted, error) {
 	data := new(MFAIsDeleted)
-	req, reqErr := CreateRequest("DELETE", os.Getenv("DOMAIN") + "/identity/v2/manage/account/2fa/authenticator", body)
+	req, reqErr := CreateRequest("DELETE", os.Getenv("DOMAIN")+"/identity/v2/manage/account/2fa/authenticator", body)
 	if reqErr != nil {
 		return *data, reqErr
 	}

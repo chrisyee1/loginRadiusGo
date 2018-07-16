@@ -22,7 +22,9 @@ import (
 )
 
 // TimeAlt is a struct to hold Time values from all sources
-type TimeAlt time.Time
+type TimeAlt struct {
+	time.Time
+}
 
 // HTTPError struct to return HTTP information
 type HTTPError struct {
@@ -43,19 +45,19 @@ func (j *TimeAlt) UnmarshalJSON(b []byte) error {
 	}
 	t, err := time.Parse(time.RFC3339, s)
 	if err == nil {
-		*j = TimeAlt(t)
+		*j = TimeAlt{t}
 		return nil
 	}
 
 	t2, err2 := time.Parse("2006-01-02T15:04:05-0700", s)
 	if err2 == nil {
-		*j = TimeAlt(t2)
+		*j = TimeAlt{t2}
 		return nil
 	}
 
 	t3, err3 := time.Parse("01/02/2006 03:04:05 PM +07:00 ", s)
 	if err3 == nil {
-		*j = TimeAlt(t3)
+		*j = TimeAlt{t3}
 		return nil
 	}
 	return nil

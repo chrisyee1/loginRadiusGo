@@ -1,11 +1,13 @@
 package test
 
 import (
+	"encoding/json"
 	"fmt"
+	"loginradius"
+	"os"
 	"strings"
 	"testing"
 	"time"
-	"loginradius"
 )
 
 func TestPostAuthAddEmail(t *testing.T) {
@@ -501,30 +503,37 @@ func TestDeleteAuthRemoveEmail(t *testing.T) {
 	fmt.Println("Test complete")
 }
 
-/*
 func TestDeleteAuthUnlinkSocialIdentities(t *testing.T) {
 	fmt.Println("Starting test TestDeleteAuthUnlinkSocialIdentities")
 	_, _, _, _, accessToken, teardownTestCase := setupLogin(t)
 	defer teardownTestCase(t)
 	candidateToken := CandidateToken{os.Getenv("CANDIDATETOKEN")}
-	session, err := PutAuthLinkSocialIdentities(accessToken, candidateToken)
+	session, err := loginradius.PutAuthLinkSocialIdentities(accessToken, candidateToken)
 	if err != nil || session.IsPosted == false {
 		t.Errorf("Error linking account")
 		fmt.Println(err)
 	}
-	id, err2 := GetAuthReadProfilesByToken(accessToken)
+	id, err2 := loginradius.GetAuthReadProfilesByToken(accessToken)
 	if err2 != nil {
 		t.Errorf("Account is not linked")
 		fmt.Println(err2)
 	}
-	provider := Provider{id.Identities[0].Provider, id.Identities[0].ID}
+	m := make(map[string]interface{})
+	if len(id.Identities) > 0 {
+		err4 := json.Unmarshal(id.Identities[0], &m)
+		if err4 != nil {
+			t.Errorf("Error getting identity")
+			fmt.Println(err4)
+		}
+	} else {
+		t.Errorf("Candidate Token invalid or expired, please replace the candidate token and try again.")
+	}
+	provider := Provider{m["Provider"].(string), m["ID"].(string)}
 	fmt.Printf("%+v\n", provider)
-	resp, err3 := DeleteAuthUnlinkSocialIdentities(accessToken, provider)
+	resp, err3 := loginradius.DeleteAuthUnlinkSocialIdentities(accessToken, provider)
 	if err3 != nil || resp.IsDeleted != true {
 		t.Errorf("Error unlinking account")
 		fmt.Println(err3)
 	}
 	fmt.Println("Test complete")
 }
-
-*/
