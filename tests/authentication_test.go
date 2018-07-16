@@ -504,6 +504,8 @@ func TestDeleteAuthRemoveEmail(t *testing.T) {
 }
 
 func TestDeleteAuthUnlinkSocialIdentities(t *testing.T) {
+	// Comment out SkipNow if Candidate Token is set
+	t.SkipNow()
 	fmt.Println("Starting test TestDeleteAuthUnlinkSocialIdentities")
 	_, _, _, _, accessToken, teardownTestCase := setupLogin(t)
 	defer teardownTestCase(t)
@@ -518,22 +520,24 @@ func TestDeleteAuthUnlinkSocialIdentities(t *testing.T) {
 		t.Errorf("Account is not linked")
 		fmt.Println(err2)
 	}
+	// Generate map object to store data
 	m := make(map[string]interface{})
+	// If Identity exists after social link, parse it, otherwise throw error
 	if len(id.Identities) > 0 {
 		err4 := json.Unmarshal(id.Identities[0], &m)
 		if err4 != nil {
-			t.Errorf("Error getting identity")
+			t.Errorf("Error parsing the Identities JSON")
 			fmt.Println(err4)
+		}
+		// Access map objects and use type assertion to assign them into the Provider struct
+		provider := Provider{m["Provider"].(string), m["ID"].(string)}
+		resp, err3 := loginradius.DeleteAuthUnlinkSocialIdentities(accessToken, provider)
+		if err3 != nil || resp.IsDeleted != true {
+			t.Errorf("Error unlinking account")
+			fmt.Println(err3)
 		}
 	} else {
 		t.Errorf("Candidate Token invalid or expired, please replace the candidate token and try again.")
-	}
-	provider := Provider{m["Provider"].(string), m["ID"].(string)}
-	fmt.Printf("%+v\n", provider)
-	resp, err3 := loginradius.DeleteAuthUnlinkSocialIdentities(accessToken, provider)
-	if err3 != nil || resp.IsDeleted != true {
-		t.Errorf("Error unlinking account")
-		fmt.Println(err3)
 	}
 	fmt.Println("Test complete")
 }
