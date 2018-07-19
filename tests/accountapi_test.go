@@ -21,7 +21,7 @@ func TestPostManageAccountCreate(t *testing.T) {
 		t.Errorf("Error creating account")
 		fmt.Println(err)
 	}
-	_, err2 := loginradius.DeleteManageAccountDelete(uid)
+	_, err2 := loginradius.DeleteManageAccount(uid)
 	if err2 != nil {
 		t.Errorf("Error cleaning up account")
 		fmt.Println(err2)
@@ -263,7 +263,7 @@ func TestPutManageAccountInvalidateVerificationEmail(t *testing.T) {
 }
 
 func TestDeleteManageAccountEmailDelete(t *testing.T) {
-	fmt.Println("Starting test TestDeleteManageAccountEmailDelete")
+	fmt.Println("Starting test TestDeleteManageAccountEmail")
 	_, _, testuid, testEmail, teardownTestCase := setupAccount(t)
 	defer teardownTestCase(t)
 	testEmails := ProfileEmail{TestEmailArr{{"Primary", testEmail}, {"Secondary", "1" + testEmail}}}
@@ -273,7 +273,7 @@ func TestDeleteManageAccountEmailDelete(t *testing.T) {
 		fmt.Println(err)
 	}
 	testEmailObj := TestEmail{testEmail}
-	session2, err2 := loginradius.DeleteManageAccountEmailDelete(testuid, testEmailObj)
+	session2, err2 := loginradius.DeleteManageAccountEmail(testuid, testEmailObj)
 	if err2 != nil || session2.UID != testuid {
 		t.Errorf("Error deleting email")
 		fmt.Println(err2)
@@ -286,7 +286,7 @@ func TestDeleteManageAccountEmailDeleteInvalid(t *testing.T) {
 	_, _, testuid, _, teardownTestCase := setupAccount(t)
 	defer teardownTestCase(t)
 	invalid := InvalidBody{"Invalid"}
-	_, err := loginradius.DeleteManageAccountEmailDelete(testuid, invalid)
+	_, err := loginradius.DeleteManageAccountEmail(testuid, invalid)
 	if err == nil {
 		t.Errorf("Should be error")
 		fmt.Println(err)
@@ -294,10 +294,10 @@ func TestDeleteManageAccountEmailDeleteInvalid(t *testing.T) {
 	fmt.Println("Test complete")
 }
 
-func TestDeleteManageAccountDelete(t *testing.T) {
-	fmt.Println("Starting test TestDeleteManageAccountDelete")
+func TestDeleteManageAccount(t *testing.T) {
+	fmt.Println("Starting test TestDeleteManageAccount")
 	_, _, testuid, _, _ := setupAccount(t)
-	_, err := loginradius.DeleteManageAccountDelete(testuid)
+	_, err := loginradius.DeleteManageAccount(testuid)
 	if err != nil {
 		t.Errorf("Error deleting account")
 		fmt.Println(err)

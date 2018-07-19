@@ -11,7 +11,7 @@ type AccessToken struct {
 	ExpiresIn   time.Time `json:"expires_in"`
 }
 
-// GetAccessTokenViaFacebook is used to get LoginRadius access token by sending Facebook’s access token.
+// GetAccessTokenViaFacebook is used to get a LoginRadius access token by sending Facebook’s access token.
 // It will be valid for the specific duration of time specified in the response.
 func GetAccessTokenViaFacebook(fbAccessToken string) (AccessToken, error) {
 	data := new(AccessToken)
@@ -30,7 +30,7 @@ func GetAccessTokenViaFacebook(fbAccessToken string) (AccessToken, error) {
 	return *data, err
 }
 
-// GetAccessTokenViaTwitter is used to get LoginRadius access token by sending Twitter’s access token.
+// GetAccessTokenViaTwitter is used to get a LoginRadius access token by sending Twitter’s access token.
 // It will be valid for the specific duration of time specified in the response.
 func GetAccessTokenViaTwitter(twAccessToken, twTokenSecret string) (AccessToken, error) {
 	data := new(AccessToken)
@@ -50,7 +50,7 @@ func GetAccessTokenViaTwitter(twAccessToken, twTokenSecret string) (AccessToken,
 	return *data, err
 }
 
-// GetAccessTokenViaVkontakte is used to get LoginRadius access token by sending Vkontakte’s access token.
+// GetAccessTokenViaVkontakte is used to get a LoginRadius access token by sending Vkontakte’s access token.
 // It will be valid for the specific duration of time specified in the response.
 func GetAccessTokenViaVkontakte(vkAccessToken string) (AccessToken, error) {
 	data := new(AccessToken)

@@ -154,7 +154,7 @@ func GetPhoneSendOTP(phone, smsTemplate string) (PhoneOTP, error) {
 	return *data, err
 }
 
-// GetPhoneNumberAvailability is used to check the Phone Number exists or not on your site.
+// GetPhoneNumberAvailability is used to check the whether the phone number exists or not on your site.
 func GetPhoneNumberAvailability(phone string) (PhoneBool, error) {
 	data := new(PhoneBool)
 	req, reqErr := CreateRequest("GET", os.Getenv("DOMAIN")+"/identity/v2/auth/phone", "")
@@ -193,7 +193,7 @@ func PutPhoneLoginUsingOTP(smsTemplate string, body interface{}) (PhoneLogin, er
 	return *data, err
 }
 
-// PutPhoneNumberUpdate is used to update the login Phone Number of users
+// PutPhoneNumberUpdate is used to update the phone number of a user.
 // The post parameter is a phoneID, phone:string.
 func PutPhoneNumberUpdate(smstemplate, authorization string, body interface{}) (PhoneOTP, error) {
 	data := new(PhoneOTP)

@@ -293,9 +293,9 @@ func PutManageAccountInvalidateVerificationEmail(verificationURL, emailTemplate,
 	return *data, err
 }
 
-// DeleteManageAccountEmailDelete is used to remove emails from a user Account.
+// DeleteManageAccountEmail is used to remove emails from a user Account.
 // Post parameters are the emails being removed.
-func DeleteManageAccountEmailDelete(uid string, body interface{}) (AuthProfile, error) {
+func DeleteManageAccountEmail(uid string, body interface{}) (AuthProfile, error) {
 	data := new(AuthProfile)
 	req, reqErr := CreateRequest("DELETE", os.Getenv("DOMAIN")+"/identity/v2/manage/account/"+uid+"/email", body)
 	if reqErr != nil {
@@ -310,8 +310,8 @@ func DeleteManageAccountEmailDelete(uid string, body interface{}) (AuthProfile, 
 	return *data, err
 }
 
-// DeleteManageAccountDelete is delete the Users account and allows them to re-register for a new account.
-func DeleteManageAccountDelete(uid string) (AccountBool, error) {
+// DeleteManageAccount is delete the Users account and allows them to re-register for a new account.
+func DeleteManageAccount(uid string) (AccountBool, error) {
 	data := new(AccountBool)
 	req, reqErr := CreateRequest("DELETE", os.Getenv("DOMAIN")+"/identity/v2/manage/account/"+uid, "")
 	if reqErr != nil {

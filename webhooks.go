@@ -20,9 +20,8 @@ type WebHook struct {
 }
 
 // PostWebhookSubscribe can be used to configure a WebHook on your LoginRadius site.
-// Webhooks also work on subscribe and notification model, subscribe your hook and get a notification.
-// Equivalent to RESThook but these provide security on basis of signature and RESThook work on unique URL.
-// Following are the events that are allowed by LoginRadius to trigger a WebHook service call.
+// Webhooks also works on subscribe and notification models by subscribing your hook and getting a notification.
+// Equivalent to RESThook but these provide security on basis of signature and RESThooks work on unique URLs.
 // Body parameters include a TargetUrl:string and Event:string
 // Allowed events can be found on the online API documentation
 func PostWebhookSubscribe(body interface{}) (WebHookBool, error) {

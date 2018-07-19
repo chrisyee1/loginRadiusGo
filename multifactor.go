@@ -235,7 +235,7 @@ func GetMFAResetBackUpCodeByUID(uid string) (MFABackUpCodes, error) {
 }
 
 // PutMFAValidateBackupCode  is used to validate the backup code provided by the user and if valid, we return an access_token
-// allowing the user to login incases where Multi-factor authentication (MFA) is enabled and the secondary factor is unavailable.
+// allowing the user to login in cases where Multi-factor authentication (MFA) is enabled and the secondary factor is unavailable.
 // When a user initially downloads the Backup codes, We generate 10 codes, each code can only be consumed once. if any user
 // attempts to go over the number of invalid login attempts configured in the Dashboard then the account gets blocked automatically
 // Post parameter is the backupcode: string for logging in

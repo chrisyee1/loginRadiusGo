@@ -82,7 +82,7 @@ func TestPostAuthUserRegistrationByEmail(t *testing.T) {
 		fmt.Println(err2)
 	}
 	uid := user.UID
-	_, err3 := loginradius.DeleteManageAccountDelete(uid)
+	_, err3 := loginradius.DeleteManageAccount(uid)
 	if err3 != nil {
 		t.Errorf("Error cleaning up account")
 		fmt.Println(err3)

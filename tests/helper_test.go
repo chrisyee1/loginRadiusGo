@@ -4,13 +4,13 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"loginradius"
 	"math/rand"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"testing"
 	"time"
-	"os"
-	"loginradius"
 )
 
 func TestRequestReturns200(t *testing.T) {
@@ -128,7 +128,7 @@ func setupAccount(t *testing.T) (string, string, string, string, func(t *testing
 	}
 	return phoneID, username, uid, retEmail, func(t *testing.T) {
 		t.Log("Tearing down test case")
-		_, err2 := loginradius.DeleteManageAccountDelete(uid)
+		_, err2 := loginradius.DeleteManageAccount(uid)
 		if err2 != nil {
 			t.Errorf("Error cleaning up account")
 			fmt.Println(err2)
@@ -160,7 +160,7 @@ func setupEmailVerificationAccount(t *testing.T) (string, string, string, func(t
 	}
 	return phoneID, retEmail, token.VerificationToken, func(t *testing.T) {
 		t.Log("Tearing down test case")
-		_, err2 := loginradius.DeleteManageAccountDelete(uid)
+		_, err2 := loginradius.DeleteManageAccount(uid)
 		if err2 != nil {
 			t.Errorf("Error cleaning up account")
 			fmt.Println(err2)

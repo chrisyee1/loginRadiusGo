@@ -174,7 +174,7 @@ func GetGenerateSottAPI(timeDifference string) (SOTT, error) {
 	return *data, err
 }
 
-// GetActiveSessionDetails is use to get all active sessions by Access Token.
+// GetActiveSessionDetails is used to get all active sessions by Access Token.
 func GetActiveSessionDetails(accessToken string) (ActiveSession, error) {
 	data := new(ActiveSession)
 	req, reqErr := CreateRequest("GET", "http://api.loginradius.com/api/v2/access_token/activesession", "")
